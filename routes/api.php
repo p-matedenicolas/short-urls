@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ShortUrlController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// TODO explain advantages of subdomain over route parameter
+Route::group(['prefix' => 'v1'], function () {
+    Route::post('short-urls', [ShortUrlController::class, 'shortenUrl']);
 });
