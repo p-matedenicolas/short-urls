@@ -1,0 +1,45 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/short-urls
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      url:
+        name: url
+        description: 'Must be a valid URL.'
+        required: true
+        example: 'http://marquardt.com/sit-maiores-excepturi-debitis-repudiandae'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      url: 'http://marquardt.com/sit-maiores-excepturi-debitis-repudiandae'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer eE4aadcvZfP66g31Vhbk5D8'
+    controller: null
+    method: null
+    route: null
+    custom: []
