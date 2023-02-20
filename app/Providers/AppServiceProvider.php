@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Auth\Token\AuthToken;
-use App\Auth\Token\ParenthesisAuthToken;
-use App\Repositories\ShortUrl\ShortUrlRepository;
-use App\Repositories\ShortUrl\TinyUrlRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,8 +11,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ShortUrlRepository::class, TinyUrlRepository::class);
-        $this->app->bind(AuthToken::class, ParenthesisAuthToken::class);
+        $apiAppServiceProvider = $this->getApiAppServiceProvider();
+        $apiAppServiceProvider?->register();
     }
 
     /**
@@ -24,6 +20,25 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $apiAppServiceProvider = $this->getApiAppServiceProvider();
+        $apiAppServiceProvider?->boot();
     }
+
+    // TODO improvement: better in a factory class
+    /**
+     * @return ServiceProvider|null
+     */
+    protected function getApiAppServiceProvider(): ?ServiceProvider
+    {
+        $apiVersion = current_api_version();
+
+        if (isset($apiVersion)) {
+            $apiAppServiceProviderNamespace = version_namespace($apiVersion, 'app\\Providers\\AppServiceProvider');
+
+            return new $apiAppServiceProviderNamespace($this->app);
+        }
+
+        return null;
+    }
+
 }

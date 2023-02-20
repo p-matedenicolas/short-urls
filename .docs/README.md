@@ -1,6 +1,14 @@
 
 # ShortUrl documentation
 
+## Structure
+
+All versions are in the `Version\[version number]` namespace, within the `version` directory
+
+A new version should be created on any breaking change to the api
+
+New versions should extend the previous versions using inheritance to expand  or modify behaviour
+
 ## Source code
 
 ### Auth
@@ -16,7 +24,7 @@
 - `Api\ApiController`
   - serves as base for all api controllers
 - `Api\ShortUrlController`
-  - controller for `/api/v1/short-urls` endpoint
+  - controller for `/api/[version number]/short-urls` endpoint
 
 #### Middleware
 
@@ -54,7 +62,7 @@ Run the following command to execute tests and see code coverage
 - `AuthTest`
   - Tests authentication of the app
 - `ShortUrlTest`
-  - Tests `/api/v1/short-urls` endpoint
+  - Tests `/api/[version number]/short-urls` endpoint
 
 ### Unit tests
 
@@ -69,4 +77,4 @@ Run the following command to execute tests and see code coverage
 
 ## Deployment
 
-![Deployment](resources/diagrams/deployment.drawio.png)
+Deploy entire project to a server

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\ShortUrlController;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// TODO explain advantages of subdomain over route parameter
-Route::group(['prefix' => 'v1'], function () {
-    Route::post('short-urls', [ShortUrlController::class, 'shortenUrl']);
+Route::group(['prefix' => '{version}'], function () {
+    $apiVersion = current_api_version();
+
+    if (isset($apiVersion)) {
+        require version_base_path($apiVersion, 'routes/api.php');
+    }
 });
