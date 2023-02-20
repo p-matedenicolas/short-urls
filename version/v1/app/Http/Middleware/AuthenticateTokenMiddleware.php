@@ -2,14 +2,14 @@
 
 namespace Version\v1\app\Http\Middleware;
 
+use App\Traits\AnswersJsonRequests;
 use Closure;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Version\v1\app\Auth\Token\AuthToken;
-use Version\v1\app\Traits\AnswersJsonRequests;
 
-class AuthenticateToken
+class AuthenticateTokenMiddleware
 {
     use AnswersJsonRequests;
 

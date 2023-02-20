@@ -22,6 +22,7 @@ class ShortUrlController extends ApiController
     }
 
     /**
+     * @urlParam version string required Example: v1
      * @param ShortenUrlRequest $request
      * @return JsonResponse
      */

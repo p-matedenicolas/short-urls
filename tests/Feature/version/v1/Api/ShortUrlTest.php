@@ -8,6 +8,7 @@ use Tests\ApiBaseTestCase;
 class ShortUrlTest extends ApiBaseTestCase
 {
     protected const TEST_ROUTE = '/api/v1/short-urls';
+    protected const TEST_INVALID_VERSION_ROUTE = '/api/v0/short-urls';
 
     public function test_shorten_success(): void
     {
@@ -40,5 +41,15 @@ class ShortUrlTest extends ApiBaseTestCase
         $response
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure(self::RESPONSE_INVALID_JSON_STRUCTURE);
+    }
+
+    public function test_shorten_invalid_route(): void
+    {
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . self::VALID_TOKEN,
+        ])->postJson(self::TEST_INVALID_VERSION_ROUTE, ['url' => self::TEST_URL, 'testVersion' => 'v0']);
+
+        $response
+            ->assertStatus(Response::HTTP_NOT_FOUND);
     }
 }

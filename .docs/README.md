@@ -28,6 +28,8 @@ New versions should extend the previous versions using inheritance to expand  or
 
 #### Middleware
 
+- `ApiVersionMiddleware`
+  - checks the version in the route parameter is one of the supported versions
 - `AuthenticateToken`
   - checks bearer token in current request is valid
 - `JsonHeaderMiddleware`

@@ -10,11 +10,11 @@ if (! function_exists('current_api_version')) {
      */
     function current_api_version(): ?string
     {
-        if (App::runningInConsole()) {
+        $urlPath = parse_url(Request::url())['path'] ?? '';
+        $apiVersion = explode('/', $urlPath)[2] ?? null;
+
+        if ($apiVersion === null && App::runningInConsole()) {
             $apiVersion = Config::get('api.latest_version');
-        } else {
-            $urlPath = parse_url(Request::url())['path'] ?? [];
-            $apiVersion = explode('/', $urlPath)[2] ?? null;
         }
 
         $supportedApiVersions = Config::get('api.supported_versions');

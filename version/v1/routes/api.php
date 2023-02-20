@@ -2,12 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Version\v1\app\Http\Controllers\Api\ShortUrlController;
-use Version\v1\app\Http\Middleware\AuthenticateToken;
-use Version\v1\app\Http\Middleware\JsonHeaderMiddleware;
+use Version\v1\app\Http\Middleware\AuthenticateTokenMiddleware;
 
 Route::middleware([
-    JsonHeaderMiddleware::class,
-    AuthenticateToken::class
+    AuthenticateTokenMiddleware::class
 ])->group(function () {
     Route::post('short-urls', [ShortUrlController::class, 'shortenUrl']);
 });
